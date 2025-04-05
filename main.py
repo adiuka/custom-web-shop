@@ -10,7 +10,7 @@ from functools import wraps
 from forms import ItemForm, RegisterForm, LoginForm
 import os
 import stripe
-Whaaaat
+
 
 class Base(DeclarativeBase):
     pass
