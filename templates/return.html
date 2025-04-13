@@ -1,0 +1,16 @@
+{% extends 'header.html' %}
+{% block content %}
+<script src="{{ url_for('static', filename='js/return.js')}}" defer></script>
+<section id="success" class="py-5">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+              <h2>We appreciate your business!</h2>
+              <p class="lead">A confirmation email will be sent to <span id="customer-email"></span>.</p>
+              <p>If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.</p>
+              <a href="{{ url_for('render_home') }}" class="btn btn-primary mt-3">Back to Homepage</a>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

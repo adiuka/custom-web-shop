@@ -1,0 +1,54 @@
+{% extends "header.html" %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">Your Cart</h2>
+
+    {% if items %}
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price (DKK)</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>
+            <img src="{{ item.img_url }}" alt="{{ item.name }}" style="height: 50px;" class="me-2">
+            {{ item.name }}
+          </td>
+      
+          <td>
+            <form method="POST" action="{{ url_for('update_cart') }}" class="d-flex align-items-center">
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-danger me-1">−</button>
+              <span>{{ item.quantity }}</span>
+              <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-success ms-1">+</button>
+            </form>
+          </td>
+      
+          <td>kr. {{ "%.2f"|format(item.price) }}</td>
+          <td>kr. {{ "%.2f"|format(item.subtotal) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+        <tr class="table-light">
+          <td colspan="3" class="text-end"><strong>Total</strong></td>
+          <td><strong>{{ "%.2f"|format(total) }} DKK</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="text-end">
+      <a href="{{ url_for('show_checkout') }}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+    </div>
+    {% else %}
+    <p class="text-center lead">Your cart is empty. Go add some items!</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

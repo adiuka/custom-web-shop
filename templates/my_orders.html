@@ -1,0 +1,22 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Your Previous Orders</h2>
+    {% if orders %}
+        <ul class="list-group mt-3">
+            {% for order in orders %}
+                <li class="list-group-item">
+                    <strong>Date:</strong> {{ order.date.strftime('%Y-%m-%d %H:%M') }}<br>
+                    <strong>Total:</strong> kr. {{ order.total_price }}<br>
+                    <strong>Items:</strong>
+                    <ul>
+                        <!--Need to figure out how to show items-->
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't placed any orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

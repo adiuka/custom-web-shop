@@ -10,6 +10,18 @@
         </div>
     </header>
         <!-- Section-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="container mt-3">
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% endwith %}
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -29,13 +41,18 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                     </div>
                                     <!-- Product price-->
-                                    kr. {{ item.price }}
+                                    kr. {{ "%.2f"|format(item.price) }}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
+                                <div class="text-center">
+                                  <a class="btn btn-outline-dark mt-auto"
+                                     href="{{ url_for('add_to_cart', item_id=item.id) }}">
+                                     Add to cart
+                                  </a>
+                                </div>
+                              </div>
                         </div>
                     </div>
                     {% endfor %}
